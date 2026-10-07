@@ -1,0 +1,18 @@
+# awesome-student-ai-skills · Python 依赖
+#
+# utils/、scripts/ 与 subskills/*/build.py 的核心依赖：
+#   python-docx  —— Word 文档生成
+#
+# v2.2 配图规范（第 27 章 / university_research G.7）运行时依赖：
+#   matplotlib   —— 数据图代码渲染（技术路线图等）。缺失时 build.py
+#                   自动回退为表格模拟并在 stderr 说明，不中断生成。
+#
+# 安装：
+#   pip install -r utils/requirements.txt
+
+python-docx>=1.1.0
+matplotlib>=3.7
+pyyaml>=6.0
+
+# Agent Skills 标准规范校验依赖（Issue #8，官方包要求 Python >= 3.11）：
+skills-ref==0.1.1; python_version >= '3.11'
