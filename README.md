@@ -1,7 +1,7 @@
 # AI Skills Library · 个人技能库
 
 > 面向 **大二 · 人工智能专业** 在校生的可执行技能集合。
-> 三条主线：**做科研 / 写论文** + **大学生申报材料** + **VibeCoding 实战与安全自检**。
+> 五条主线：**做科研 / 写论文** + **大学生申报材料** + **VibeCoding 实战与安全自检** + **文献综述工作流** + **学术绘图**。
 > 每个技能都是可被 AI Agent 直接加载的独立单元（Agent Skills 标准）。
 
 ---
@@ -63,6 +63,20 @@ ai-skills-library/
 │   ├── 05-安全自检提示词汇总.md     # 20 条可复制提示词
 │   └── assets/                    # 21 张原始卡片图（13.14 MB）
 │
+├── 04-文献综述工作流/       # 叙述性文献综述（NLR）AI 流水线（6 个技能）
+│   ├── NLR-完整手册.md             # 上游 790 行完整手册
+│   ├── CLAUDE.md                  # Claude Code 项目配置
+│   ├── .claude/skills/            # lit-status / lit-audit / lit-cite
+│   │                              # lit-deregister / lit-draft / lit-gate
+│   ├── manuscript/zotero.lua      # Pandoc 的 Zotero 引用过滤器
+│   ├── pyproject.toml + uv.lock   # uv 依赖
+│   └── search/ screening/ extractions/ synthesis/   # 空脚手架
+│       outline/ draft/ references/ scripts/         # （clone 即用）
+│
+├── 05-学术绘图/             # 用 R 出科研/生信图（1 个技能）
+│   ├── plotthis-r-plotting/       # SKILL.md + 40+ 函数 API 快照 + 3 个 R 脚本
+│   └── _上游文档-AGENTS.md / -LICENSE.md
+│
 └── _meta/
     ├── SOURCES.md         # 来源、许可证、抓取时间
     ├── SECURITY-AUDIT.md  # 第三方代码安全审计报告
@@ -84,15 +98,25 @@ ai-skills-library/
 | 从零开始做科研 | 「我想进课题组做科研，该从哪开始」 |
 | 不会读论文 | 「教我怎么读一篇顶会论文」 |
 | 论文要投稿被拒 | 「审稿人说 novelty 不足，帮我想 rebuttal」 |
+| **写一篇文献综述** | 「用 nlr-workflow 帮我做一篇叙述性文献综述」 |
+| **去掉文章的 AI 味** | 「用 lit-deregister 把这节改得像人写的」 |
+| **用 R 画科研图** | 「用 plotthis-r-plotting 画分组散点图，出 PNG + PDF + R 脚本」 |
+| **上线前查代码安全** | 「按安全自检清单过一遍我的接口」 |
 
 ### 用法 2：加载为 Skill（推荐给 Agent）
 
 ```
-# 科研线总入口
+# 科研方法论总入口
 01-科研入门/SKILL.md
 
 # 申报材料线：按赛道加载
 02-申报材料/科研立项/innovation-research/SKILL.md
+
+# 文献综述工作流：6 个技能在
+04-文献综述工作流/.claude/skills/lit-*/
+
+# 学术绘图
+05-学术绘图/plotthis-r-plotting/SKILL.md
 ```
 
 ### 用法 3：直接跑脚本出 Word
@@ -116,6 +140,8 @@ python 02-申报材料/奖学金/national-scholarship/build.py \
 
 ## 科研线速查：按阶段找文件
 
+> 下表前 10 行的路径位于 `01-科研入门/` 下。
+
 | 你现在处于 | 看这个 |
 |---|---|
 | 刚进组，不知道科研是什么 | `01-如何做科研.md` |
@@ -123,11 +149,15 @@ python 02-申报材料/奖学金/national-scholarship/build.py \
 | 论文读不懂 / 读完就忘 | `03-如何读论文.md` |
 | 要提创新点，不知道从哪想 | `04-如何想Idea.md` |
 | 动笔写第一篇论文 | `05` → `06` ~ `11` |
-| 图画不好，审稿人看不明白 | `12-论文画图指南.md` |
+| 图画不好，审稿人看不明白 | `12-论文画图指南.md`（**原理**） |
 | 收到审稿意见要回复 | `13-如何Rebuttal.md` |
 | 要讲组会 / 听报告 | `14` / `15` / `16` |
 | 想建立长期习惯 | `17-好的科研习惯.md` |
 | 想知道 AI 怎么辅助科研 | `18-AI辅助科研技巧.md` |
+| **要写一整篇文献综述** | `../04-文献综述工作流/`（**可执行流水线**） |
+| **要真的用 R 出图** | `../05-学术绘图/plotthis-r-plotting/`（**工具**） |
+
+> 分工：`01-科研入门` 是**方法论**，`04` 是**流水线**，`05` 是**出图工具**。
 
 ---
 

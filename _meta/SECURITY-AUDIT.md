@@ -134,3 +134,51 @@ proc = subprocess.run(
 `01-科研入门/` 全部为 Markdown 文本，**不含任何可执行代码**，无审计必要。
 
 `03-VibeCoding实战/` 全部为 Markdown 文本 + 21 张 JPG 图片，**不含任何可执行代码**，无审计必要。
+
+---
+
+## 七、新增来源审计（`04` / `05`，2026-10-08）
+
+**审计对象**：
+- `04-文献综述工作流/` ← [bionoob7/nlr-workflow](https://github.com/bionoob7/nlr-workflow)，27 个文件
+- `05-学术绘图/` ← [bionoob7/ben-academic-skill](https://github.com/bionoob7/ben-academic-skill)，59 个文件
+
+**结论：通过。未发现 P0 / P1 风险。**
+
+### 危险模式扫描
+
+| 类别 | `nlr-workflow` | `ben-academic-skill` |
+|---|---|---|
+| `os.system` / `subprocess` | 0 / 0 | 0 / 0 |
+| `eval` / `exec` / `__import__` | 0 / 0 / 0 | 0 / 0 / 0 |
+| 网络请求（requests/urllib/socket） | 0 | 0 |
+| 删除操作（rmtree / os.remove） | 0 | 0 |
+| 反序列化（pickle.loads） | 0 | 0 |
+| `os.chmod` | 0 | 0 |
+| 持久化（AppData/Startup/注册表/.pth） | 2 处（**已核实无害**） | 0 |
+| `curl` / `wget` 调用 | 1 处（**已核实无害**） | 0 |
+
+### 可疑点人工核实
+
+1. **`CLAUDE.md:209`** —— 匹配到 `### Session Startup Checklist`，是一个**文档小标题**，不是持久化代码。
+2. **`.claude/skills/lit-status/SKILL.md`** —— 同类文档性匹配。
+3. **`README.md:83`** —— `curl -LsSf https://astral.sh/uv/install.sh | sh`，是 **uv 官方安装命令写在使用文档里**，属说明文字，不是被调用的代码。
+
+### 密钥检测
+
+对 5 类密钥形态（`sk-`、`ghp_`/`github_pat_`、`AKIA`、32 位以上十六进制、`Bearer` 长串）做全量匹配：
+
+| 命中 | 判定 |
+|---|---|
+| `nlr-workflow/uv.lock` 中 1050 处长十六进制串 | ✅ **PyPI 包哈希值**，锁文件正常内容 |
+| `ben-academic-skill/.../snapshot-md5.txt` 中 42 处 | ✅ **上游文档的 MD5 校验清单**，正常内容 |
+| `.env.example` 中的 `sk-xxxxxxxxxxxxxxxxx` | ✅ **占位符**，非真实 key |
+
+> 结论：**未发现任何真实密钥被提交**。上游 `.gitignore` 已忽略 `.env`。
+
+### 未覆盖的部分
+
+- ❌ 未实际运行 `nlr-workflow` 的流程（需 uv、DeepSeek API key、Zotero、Pandoc，本机均未安装）
+- ❌ 未实际运行 `ben-academic-skill` 的 R 脚本（本机未安装 R）
+- ⚠️ 依据为**静态扫描**：无网络外联、无动态执行、无凭证读取、无持久化，且代码规模小（Lua 1 个 + R 3 个 + Python 0 个）
+- ⚠️ `04` 的 `scripts/` 目录在拉取时为空（上游只有 `.gitkeep`），**Python 自动化脚本并未包含在上游仓库中**，因此无从审计

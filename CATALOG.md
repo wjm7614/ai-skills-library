@@ -1,6 +1,6 @@
 # CATALOG · 全量索引
 
-本库共收录 **3 条主线 / 41 个技能**。下表标注了收录状态，未收录的也列出来，方便你以后按需补。
+本库共收录 **5 条主线 / 48 个技能**。下表标注了收录状态，未收录的也列出来，方便你以后按需补。
 
 ---
 
@@ -106,13 +106,62 @@ curl -L -o SKILL.md \
 
 ---
 
+## 四、文献综述工作流（6 个，全部收录）
+
+来源：[bionoob7/nlr-workflow](https://github.com/bionoob7/nlr-workflow)（⭐ 39，**未声明许可证**）
+位置：`04-文献综述工作流/`
+
+叙述性文献综述（NLR）的 AI 辅助流水线，七阶段：检索 → 筛选 → 提取 → 综合 → 写作 → 五轮润色 → 出 Word。
+
+| # | 技能 | 作用 | 附带参考 |
+|---|---|---|---|
+| 1 | `lit-status` | 查看/记录当前进度 | — |
+| 2 | `lit-audit` | 审查论证与事实一致性 | `claim-patterns.md` 9KB |
+| 3 | `lit-cite` | 生成与管理参考文献 | `bib-formats.md` 5KB |
+| 4 | `lit-deregister` | **去除 AI 写作痕迹** | `ai-patterns.md` 16KB |
+| 5 | `lit-draft` | 逐节起草正文 | `quality-constraints.md` 17KB |
+| 6 | `lit-gate` | 投稿前门控检查 | `gate-thresholds.md` 8KB |
+
+附带资产：`CLAUDE.md`（项目配置）、`NLR-完整手册.md`（上游 34KB 手册）、`pyproject.toml` + `uv.lock`（uv 依赖）、`manuscript/zotero.lua`（Pandoc 的 Zotero 过滤器 53KB）、8 个空脚手架目录（search/screening/extractions/synthesis/outline/draft/references/scripts）。
+
+> 需要外部依赖：uv、DeepSeek API key、Zotero + Better BibTeX、Pandoc。
+
+---
+
+## 五、学术绘图（1 个，全部收录）
+
+来源：[bionoob7/ben-academic-skill](https://github.com/bionoob7/ben-academic-skill)
+位置：`05-学术绘图/`
+
+| # | 技能 | 作用 | 许可 |
+|---|---|---|---|
+| 1 | `plotthis-r-plotting` | R + plotthis 画统计/科研/生信图，可叠 ggplot2 精修 | **GPL-3.0-or-later** |
+
+附带资产：40+ 个 plotthis 函数的 API 快照（`references/api/*.Rd`）、3 个 R 脚本（只读检查 / 冒烟测试 / 重建索引）、`provenance.md` 来源记录。
+
+> ⚠️ GPL-3.0 是传染性许可；上游根目录的原创文件**未授予许可**。
+
+---
+
 ## 汇总
 
 | 主线 | 收录 | 总计 |
 |---|---|---|
-| 科研入门 | 19 | 19（全覆盖） |
-| 申报材料 | 17 | 35 |
-| VibeCoding 实战 | 5 | 5（全覆盖） |
-| **合计可用技能** | **41** | — |
+| 01 科研入门 | 19 | 19（全覆盖） |
+| 02 申报材料 | 17 | 35 |
+| 03 VibeCoding 实战 | 5 | 5（全覆盖） |
+| 04 文献综述工作流 | 6 | 6（全覆盖） |
+| 05 学术绘图 | 1 | 1（全覆盖） |
+| **合计可用技能** | **48** | — |
 
-> 另有 21 张原始卡片图作为附件归档（`03-VibeCoding实战/assets/`）。
+附件归档：21 张原始卡片图（`03-VibeCoding实战/assets/`）。
+
+### 许可一览（重要）
+
+| 主线 | 许可 | 注意事项 |
+|---|---|---|
+| 01 科研入门 | 上游未声明 | 个人学习用途，保留署名 |
+| 02 申报材料 | **MIT** | 可自由使用，须保留原作者署名与免责声明 |
+| 03 VibeCoding 实战 | 用户提供 | — |
+| 04 文献综述工作流 | **上游未声明** | 不建议商业分发 |
+| 05 学术绘图 | **GPL-3.0-or-later** | 传染性许可；上游根目录原创文件未授权 |
