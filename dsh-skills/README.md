@@ -1,6 +1,6 @@
 # dsh-skills
 
-DeepSeek Harness 可调用的扁平技能层，337 个技能。
+DeepSeek Harness 可调用的扁平技能层，257 个技能。
 
 每个 skill 是 `<kebab-name>/SKILL.md` 目录式布局，
 带合法 YAML frontmatter（`name` 为 kebab-case、`description` ≤ 500 字符）。

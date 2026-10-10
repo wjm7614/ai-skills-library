@@ -29,12 +29,11 @@
 
 | 分类 | 技能数 |
 |---|---|
-| 🔬 科研流程 · 从选题到投稿 | 23 |
+| 🔬 科研流程 · 从选题到投稿 | 24 |
 | 📚 文献检索 · 获取 · 管理 | 15 |
 | ✍️ 论文写作 · 排版 · 出图 | 18 |
-| 📊 数据分析 · 统计 · 科研绘图 | 41 |
-| 🧬 生物 · 医学 · 组学 | 84 |
-| 🤖 AI / 深度学习工程 | 70 |
+| 📊 数据分析 · 统计 · 科研绘图 | 42 |
+| 🤖 AI / 深度学习工程 | 71 |
 | 🎨 多模态 · 生成模型 | 21 |
 | ⚛️ 量子 · 物理 · 化学仿真 | 8 |
 | 🛠️ 软件开发 · 工程实践 | 32 |
@@ -57,6 +56,7 @@
 | `research-manager` | 科研过程留痕：任务结束后扫描会话，把决策、实验、死胡同、启发、转向写进 ara/ 目录，带人机来源标记 | junshi-research |
 | `research-grants` | 科研基金申请：本子结构、评审要点、写作策略 | junshi-research |
 | `iso-standards-readiness` | ISO 标准合规就绪度评估：按国际标准逐条对照差距 | K-Dense-AI |
+| `fictiv` | Fictiv 在线制造平台：上传 CAD 零件、选工艺材料公差、即时/人工报价、DFM 反馈修复、交期选择 | K-Dense-AI |
 | `market-research-reports` | 市场研究报告：行业分析、竞争格局、数据支撑 | K-Dense-AI |
 | `literature-review` | 文献综述写作：叙述性/系统性综述的组织与批判性整合 | Orchestra-Research |
 | `scientific-critical-thinking` | 科学批判性思维：识别论证漏洞、证据强度、因果误判 | Orchestra-Research |
@@ -145,6 +145,7 @@
 | `shap` | 模型可解释性（SHAP） | K-Dense-AI |
 | `simpy` | 离散事件仿真 | K-Dense-AI |
 | `timesfm-forecasting` | 时序预测（TimesFM） | K-Dense-AI |
+| `aeon` | 时间序列机器学习：分类、回归、聚类、预测、异常检测、分割、相似检索 | K-Dense-AI |
 | `pymoo` | 多目标优化 | K-Dense-AI |
 | `matlab` | MATLAB / Octave 代码与数值计算 | K-Dense-AI |
 | `scientific-toolkit-skill` | 科研计算工具箱：MATLAB/Octave、Python 科学分析、信号处理、图像处理、统计、仿真、优化、投稿配图、传感器/时序数据、引用查询、常用科学库 | Imbad0202 |
@@ -166,97 +167,7 @@
 
 ---
 
-## 🧬 五、生物 · 医学 · 组学
-
-| 技能 | 能干什么 | 来源 |
-|---|---|---|
-| `biopython` | Biopython 序列处理 | K-Dense-AI |
-| `bioservices` | 生物服务 API 聚合 | K-Dense-AI |
-| `scanpy` | 单细胞 RNA 分析（Scanpy） | K-Dense-AI |
-| `anndata` | 单细胞数据结构 | K-Dense-AI |
-| `scvi-tools` | 单细胞变分推断 | K-Dense-AI |
-| `scvelo` | RNA 速率分析 | K-Dense-AI |
-| `pydeseq2` | 差异表达分析（DESeq2） | K-Dense-AI |
-| `bulk-rnaseq` | 批量 RNA-seq 分析流程 | K-Dense-AI |
-| `deeptools` | 深度测序数据处理 | K-Dense-AI |
-| `pysam` | SAM/BAM 文件处理 | K-Dense-AI |
-| `tiledbvcf` | VCF 变异数据管理 | K-Dense-AI |
-| `onekgpd` | 千人基因组数据 | K-Dense-AI |
-| `depmap` | DepMap 依赖图谱 | K-Dense-AI |
-| `genomic-coordinates` | 基因组坐标转换 | K-Dense-AI |
-| `genomic-intelligence` | 基因组智能分析 | K-Dense-AI |
-| `geniml` | 基因组机器学习 | K-Dense-AI |
-| `gtars` | 基因组区间工具 | K-Dense-AI |
-| `gget` | 基因查询工具箱（gget） | K-Dense-AI |
-| `etetoolkit` | 系统发育树处理 | K-Dense-AI |
-| `phylogenetics` | 系统发育分析 | K-Dense-AI |
-| `primer-design` | 引物设计 | K-Dense-AI |
-| `qiime2-amplicon` | QIIME2 扩增子分析 | K-Dense-AI |
-| `mageck` | CRISPR 筛选分析（MAGeCK） | K-Dense-AI |
-| `pacsomatic` | PACSOmatic 变异分析 | K-Dense-AI |
-| `pathogen-variant-surveillance` | 病原变异监测 | K-Dense-AI |
-| `relsa-severity-assessment` | 疾病严重度评估 | K-Dense-AI |
-| `folklore-variant-evidence` | 变异证据整合 | K-Dense-AI |
-| `cellxgene-census` | CellxGene 细胞图谱 | K-Dense-AI |
-| `cellprofiler` | 细胞图像分析 | K-Dense-AI |
-| `histolab` | 组织切片图像处理 | K-Dense-AI |
-| `pathml` | 病理图像机器学习 | K-Dense-AI |
-| `imaging-data-commons` | 医学影像数据（IDC） | K-Dense-AI |
-| `pydicom` | DICOM 医学影像 | K-Dense-AI |
-| `omero-integration` | OMERO 显微图像平台 | K-Dense-AI |
-| `bids` | 脑影像数据规范（BIDS） | K-Dense-AI |
-| `nwb-conversion` | 神经数据格式转换（NWB） | K-Dense-AI |
-| `neurokit2` | 神经生理信号处理 | K-Dense-AI |
-| `neuropixels-analysis` | Neuropixels 电生理分析 | K-Dense-AI |
-| `ontology-term-resolution` | 本体术语归一 | K-Dense-AI |
-| `pathway-enrichment` | 通路富集分析 | K-Dense-AI |
-| `primekg` | PrimeKG 知识图谱 | K-Dense-AI |
-| `pyopenms` | 质谱数据处理（OpenMS） | K-Dense-AI |
-| `matchms` | 质谱谱图匹配 | K-Dense-AI |
-| `nmrglue` | NMR 数据处理 | K-Dense-AI |
-| `13c-metabolic-flux` | 碳-13 代谢通量估计 | K-Dense-AI |
-| `cobrapy` | 代谢网络建模（COBRA） | K-Dense-AI |
-| `arboreto` | 基因调控网络推断 | K-Dense-AI |
-| `aeon` | 时间序列机器学习 | K-Dense-AI |
-| `flowio` | 流式细胞数据读写 | K-Dense-AI |
-| `flowkit` | 流式细胞分析 | K-Dense-AI |
-| `saelens` | Saelens 分析工具 | K-Dense-AI |
-| `datamol` | 分子数据处理（Datamol） | K-Dense-AI |
-| `rdkit` | 化学信息学（RDKit） | K-Dense-AI |
-| `deepchem` | 深度化学（DeepChem） | K-Dense-AI |
-| `medchem` | 药物化学规则 | K-Dense-AI |
-| `molfeat` | 分子特征化 | K-Dense-AI |
-| `pytdc` | 治疗数据共享集 | K-Dense-AI |
-| `torchdrug` | 药物发现图神经网络 | K-Dense-AI |
-| `diffdock` | 分子对接（DiffDock） | K-Dense-AI |
-| `molecular-dynamics` | 分子动力学模拟 | K-Dense-AI |
-| `glycoengineering` | 糖基化工程 | K-Dense-AI |
-| `benchling-integration` | Benchling 实验室平台对接 | K-Dense-AI |
-| `labarchive-integration` | LabArchives 电子实验记录 | K-Dense-AI |
-| `latchbio-integration` | Latch Bio 云平台 | K-Dense-AI |
-| `dnanexus-integration` | DNAnexus 云平台 | K-Dense-AI |
-| `protocolsio-integration` | protocols.io 实验流程 | K-Dense-AI |
-| `ginkgo-cloud-lab` | Ginkgo 云实验室 | K-Dense-AI |
-| `waypoint-bio` | Waypoint Bio 平台 | K-Dense-AI |
-| `tamarind` | Tamarind 生物平台 | K-Dense-AI |
-| `adaptyv` | Adaptyv 蛋白实验 | K-Dense-AI |
-| `rowan` | Rowan 化学计算平台 | K-Dense-AI |
-| `fictiv` | Fictiv 制造对接 | K-Dense-AI |
-| `opentrons-integration` | Opentrons 自动化移液 | K-Dense-AI |
-| `pylabrobot` | 实验室机器人编排 | K-Dense-AI |
-| `lab-hardware-cad` | 实验硬件 CAD | K-Dense-AI |
-| `ncats-arax` | NCATs ARax 问答 | K-Dense-AI |
-| `alphagenome` | AlphaGenome 基因组模型 | K-Dense-AI |
-| `esm` | ESM 蛋白语言模型 | K-Dense-AI |
-| `pkpd-modeling` | 药代/药效动力学建模 | K-Dense-AI |
-| `clinical-decision-support` | 临床决策支持 | K-Dense-AI |
-| `clinical-reports` | 临床报告撰写 | K-Dense-AI |
-| `treatment-plans` | 治疗方案制定 | K-Dense-AI |
-| `deepspot-m` | DeepSpot-M 分析 | K-Dense-AI |
-
----
-
-## 🤖 六、AI / 深度学习工程
+## 🤖 五、AI / 深度学习工程
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
@@ -330,10 +241,11 @@
 | `nnsight` | 模型内部干预（nnsight） | K-Dense-AI |
 | `pyvene` | 模型激活干预（pyvene） | K-Dense-AI |
 | `transformer-lens` | TransformerLens 可解释性 | K-Dense-AI |
+| `saelens` | 稀疏自编码器（SAELens）：把神经网络激活分解成可解释特征，研究叠加与单义表征 | K-Dense-AI |
 
 ---
 
-## 🎨 七、多模态 · 生成模型
+## 🎨 六、多模态 · 生成模型
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
@@ -361,7 +273,7 @@
 
 ---
 
-## ⚛️ 八、量子 · 物理 · 化学仿真
+## ⚛️ 七、量子 · 物理 · 化学仿真
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
@@ -376,7 +288,7 @@
 
 ---
 
-## 🛠️ 九、软件开发 · 工程实践
+## 🛠️ 八、软件开发 · 工程实践
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
@@ -415,7 +327,7 @@
 
 ---
 
-## 🎯 十、前端 · UI/UX · 设计
+## 🎯 九、前端 · UI/UX · 设计
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
@@ -435,7 +347,7 @@
 
 ---
 
-## ☁️ 十一、科研软件 · 云平台 · 工作流
+## ☁️ 十、科研软件 · 云平台 · 工作流
 
 | 技能 | 能干什么 | 来源 |
 |---|---|---|
