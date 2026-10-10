@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plotthis R 绘图"
+  short_description: "优先使用 plotthis 完成 R 科研绘图，核对参数并支持 ggplot2 精修"
+  default_prompt: "使用 $plotthis-r-plotting 根据我的数据选择合适图型，运行绘图并交付图像和可复现 R 脚本。"

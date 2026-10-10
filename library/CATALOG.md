@@ -1,0 +1,167 @@
+# CATALOG · 全量索引
+
+本库共收录 **5 条主线 / 48 个技能**。下表标注了收录状态，未收录的也列出来，方便你以后按需补。
+
+---
+
+## 一、科研入门（19 个，全部收录）
+
+来源：[LAMDA-NeSy/Research-Starter-Kit](https://github.com/LAMDA-NeSy/Research-Starter-Kit)
+位置：`01-科研入门/`
+
+| # | 文件 | 内容 | 状态 |
+|---|---|---|---|
+| 0 | `SKILL.md` | 总路由：按科研阶段分发 | ✅ |
+| 1 | `01-如何做科研.md` | 什么是研究、创新性怎么评判、研究生任务 | ✅ |
+| 2 | `02-如何找论文.md` | 顶会顶刊清单、种子论文法、引文网络追踪 | ✅ |
+| 3 | `03-如何读论文.md` | 七步读法、批判性思考占比 6:4 | ✅ |
+| 4 | `04-如何想Idea.md` | Problem-driven vs Method-driven、找问题三个切入 | ✅ |
+| 5 | `05-如何写论文.md` | 论文说什么、八点逻辑链、大纲结构 | ✅ |
+| 6 | `06-摘要Abstract.md` | 五句话原则、结构性问题 vs 经验现象 | ✅ |
+| 7 | `07-引言Introduction.md` | 四段式、常用句式、不要一上来写方法 | ✅ |
+| 8 | `08-相关工作RelatedWorks.md` | 按技术路线组织、三个必答问题 | ✅ |
+| 9 | `09-方法Methods.md` | 总分结构、Overview 与主图配合 | ✅ |
+| 10 | `10-实验Experiments.md` | Setup/Main/Ablation/分析、公平比较 | ✅ |
+| 11 | `11-参考文献Reference.md` | 手改 bib、大小写保护 | ✅ |
+| 12 | `12-论文画图指南.md` | 动机图/方法图/实验图、Self-Contain | ✅ |
+| 13 | `13-如何Rebuttal.md` | 逐点回应、审稿人倾向、三类常见问题 | ✅ |
+| 14 | `14-学术汇报.md` | PPT 规范、价值判断、站在听众角度 | ✅ |
+| 15 | `15-高效组会Meeting.md` | 组会目的、模板、频率 | ✅ |
+| 16 | `16-学术会议参会指南.md` | 会前准备、30秒/1分钟/5分钟版本 | ✅ |
+| 17 | `17-好的科研习惯.md` | 输入、知识管理、实验日志 | ✅ |
+| 18 | `18-AI辅助科研技巧.md` | Claude Code 快捷键、上下文 vs 记忆 | ✅ |
+
+---
+
+## 二、大学生申报材料（收录 17 / 上游共 35）
+
+来源：[cuic19053-hue/awesome-student-ai-skills](https://github.com/cuic19053-hue/awesome-student-ai-skills)（MIT）
+位置：`02-申报材料/`
+
+### 已收录（17）
+
+| 类别 | 赛道 | 目录名 | 适用 |
+|---|---|---|---|
+| 科研立项 | 大创·创新训练 | `innovation-research` | 偏学术研究 |
+| 科研立项 | 大创·创业训练 | `entrepreneurship-training` | 商业计划不出公司 |
+| 科研立项 | 大创·创业实践 | `entrepreneurship-practice` | 实际注册运营 |
+| 科研立项 | 校级科研立项 | `university-research` | SRTP |
+| 科研立项 | 院级科研立项 | `college-research` | 门槛更低 |
+| 学科竞赛 | 挑战杯 | `challenge-cup` | 课外学术科技作品 |
+| 学科竞赛 | 互联网+ | `internet-plus` | 商业计划书 |
+| 学科竞赛 | 互联网+红旅 | `internet-plus-red-tour` | 红色之旅赛道 |
+| 奖学金 | 国家奖学金 | `national-scholarship` | 10000 元 |
+| 奖学金 | 国家励志奖学金 | `motivation-scholarship` | 6000 元 |
+| 评优评先 | 优秀学生/三好学生 | `outstanding-student` | 学年评优 |
+| 评优评先 | 优秀毕业设计/论文 | `outstanding-thesis` | 大四申报 |
+| 升学保研 | 保研推免 | `graduate-recommendation` | 免试读研 |
+| 社会实践 | 三下乡·社会调查 | `social-survey` | 调研报告 |
+| 社会实践 | 三下乡·支教 | `volunteer-teaching` | 教育帮扶 |
+| 社会实践 | 三下乡·科技服务 | `tech-service` | 科技下乡 |
+| 社会实践 | 三下乡·政策宣讲 | `policy-lecture` | 理论宣讲 |
+
+### 上游有、本库未收录（18）
+
+未收录原因是与当前阶段匹配度低，不是质量差。需要时按下方"补录方法"拉进来。
+
+| 类别 | 赛道 | 说明 |
+|---|---|---|
+| 奖学金 | 校级 / 企业专项 / 单项 / 国家助学金 | 4 个 |
+| 评优 | 优秀毕业生 / 优秀学生干部 / 文明大学生 / 优秀班集体 | 4 个 |
+| 政治身份 | 入团申请书 / 阶段汇报 / 转正申请书 | 3 个 |
+| 升学 | 选调生申请 | 1 个 |
+| 公派留学 | CSC 公派 / 交流项目 | 2 个 |
+| 其他 | 转专业申请 / 应征入伍 | 2 个 |
+| 科研 | 国家级项目立项逻辑评测 | 1 个 |
+| 实践 | 西部计划 | 1 个 |
+
+### 补录方法
+
+上游为公开仓库，直接取对应目录即可：
+
+```bash
+# 目录名见上游 index.json 的 name 字段
+# 例如补录「入团申请书」
+curl -L -o SKILL.md \
+  https://raw.githubusercontent.com/cuic19053-hue/awesome-student-ai-skills/main/subskills/youth-league-application/SKILL.md
+```
+
+---
+
+## 三、VibeCoding 实战（5 个，全部收录）
+
+来源：用户提供的抖音视频要点 + 21 张《Vibe Coding 代码安全自检清单》卡片图
+位置：`03-VibeCoding实战/`
+
+| # | 文件 | 内容 | 来源 |
+|---|---|---|---|
+| 1 | `01-架构搭建四步法.md` | 拆模块 / 分三层 / 先画蓝图 / 定对接规范 + 报错排查三步法 | 视频要点 |
+| 2 | `02-后端架构验收8步法.md` | 不懂代码怎么验收 AI 搭的后端 | 视频要点 |
+| 3 | `03-上线前安全审计流程.md` | 上线前安全审计 7 步流程总览 | 视频要点 |
+| 4 | `04-代码安全自检清单21项.md` | **21 项完整精讲**（核心 / 要点 / 对 AI 说 / 你看什么） | 21 张卡片图 |
+| 5 | `05-安全自检提示词汇总.md` | **20 条可复制提示词** | 21 张卡片图 |
+| — | `assets/` | 21 张原始卡片图（已从微信临时目录抢救归档，13.14 MB） | 用户提供 |
+
+> 21 张图**不是视频截图**，是独立的《代码安全自检清单》，价值在于每项都附**可直接复制的审查提示词**，因此单独做成完整 skill。
+
+---
+
+## 四、文献综述工作流（6 个，全部收录）
+
+来源：[bionoob7/nlr-workflow](https://github.com/bionoob7/nlr-workflow)（⭐ 39，**未声明许可证**）
+位置：`04-文献综述工作流/`
+
+叙述性文献综述（NLR）的 AI 辅助流水线，七阶段：检索 → 筛选 → 提取 → 综合 → 写作 → 五轮润色 → 出 Word。
+
+| # | 技能 | 作用 | 附带参考 |
+|---|---|---|---|
+| 1 | `lit-status` | 查看/记录当前进度 | — |
+| 2 | `lit-audit` | 审查论证与事实一致性 | `claim-patterns.md` 9KB |
+| 3 | `lit-cite` | 生成与管理参考文献 | `bib-formats.md` 5KB |
+| 4 | `lit-deregister` | **去除 AI 写作痕迹** | `ai-patterns.md` 16KB |
+| 5 | `lit-draft` | 逐节起草正文 | `quality-constraints.md` 17KB |
+| 6 | `lit-gate` | 投稿前门控检查 | `gate-thresholds.md` 8KB |
+
+附带资产：`CLAUDE.md`（项目配置）、`NLR-完整手册.md`（上游 34KB 手册）、`pyproject.toml` + `uv.lock`（uv 依赖）、`manuscript/zotero.lua`（Pandoc 的 Zotero 过滤器 53KB）、8 个空脚手架目录（search/screening/extractions/synthesis/outline/draft/references/scripts）。
+
+> 需要外部依赖：uv、DeepSeek API key、Zotero + Better BibTeX、Pandoc。
+
+---
+
+## 五、学术绘图（1 个，全部收录）
+
+来源：[bionoob7/ben-academic-skill](https://github.com/bionoob7/ben-academic-skill)
+位置：`05-学术绘图/`
+
+| # | 技能 | 作用 | 许可 |
+|---|---|---|---|
+| 1 | `plotthis-r-plotting` | R + plotthis 画统计/科研/生信图，可叠 ggplot2 精修 | **GPL-3.0-or-later** |
+
+附带资产：40+ 个 plotthis 函数的 API 快照（`references/api/*.Rd`）、3 个 R 脚本（只读检查 / 冒烟测试 / 重建索引）、`provenance.md` 来源记录。
+
+> ⚠️ GPL-3.0 是传染性许可；上游根目录的原创文件**未授予许可**。
+
+---
+
+## 汇总
+
+| 主线 | 收录 | 总计 |
+|---|---|---|
+| 01 科研入门 | 19 | 19（全覆盖） |
+| 02 申报材料 | 17 | 35 |
+| 03 VibeCoding 实战 | 5 | 5（全覆盖） |
+| 04 文献综述工作流 | 6 | 6（全覆盖） |
+| 05 学术绘图 | 1 | 1（全覆盖） |
+| **合计可用技能** | **48** | — |
+
+附件归档：21 张原始卡片图（`03-VibeCoding实战/assets/`）。
+
+### 许可一览（重要）
+
+| 主线 | 许可 | 注意事项 |
+|---|---|---|
+| 01 科研入门 | 上游未声明 | 个人学习用途，保留署名 |
+| 02 申报材料 | **MIT** | 可自由使用，须保留原作者署名与免责声明 |
+| 03 VibeCoding 实战 | 用户提供 | — |
+| 04 文献综述工作流 | **上游未声明** | 不建议商业分发 |
+| 05 学术绘图 | **GPL-3.0-or-later** | 传染性许可；上游根目录原创文件未授权 |
