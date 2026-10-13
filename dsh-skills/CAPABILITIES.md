@@ -20,6 +20,7 @@
 | `anthropics/skills` | Anthropic 官方技能 | 17 |
 | `nextlevelbuilder/ui-ux-pro-max-skill` | UI/UX Pro Max | 12 |
 | `pbakaus/impeccable` | Impeccable 设计品味 | 1 |
+| `Adkid-Zephyr/anti-defensive-writing-Skill` | 反防御性写作（MIT，2.9k star） | 2 |
 | `vercel-labs/agent-skills` | Vercel 工程技能 | 8 |
 
 > `appautomaton/latex-arxiv-SKILL` 与 `K-Dense-AI/scientific-agent-skills` 的内容已合并进上述分类；
@@ -29,7 +30,7 @@
 
 | 分类 | 技能数 |
 |---|---|
-| 🔬 科研流程 · 从选题到投稿 | 24 |
+| 🔬 科研流程 · 从选题到投稿 | 26 |
 | 📚 文献检索 · 获取 · 管理 | 15 |
 | ✍️ 论文写作 · 排版 · 出图 | 18 |
 | 📊 数据分析 · 统计 · 科研绘图 | 42 |
@@ -69,6 +70,8 @@
 | `research-writing-skill` | 研究写作技能包：论文各部分写作规范与句式 | junshi-research |
 | `scientific-writing` | 科学写作：清晰、准确、可复现的表达规范 | Master-cai |
 | `writing-guidelines` | 写作通用准则 | Master-cai |
+| `anti-defensive-writing` | 阻止论文防御性写作：把论文当学术发布会而非项目总结。围绕最强优势组织叙事，不平均展示、不主动示弱、不写实验流水账、不替审稿人攻击自己。含摘要引言结论写法、实验取舍、交稿自查 | Adkid-Zephyr |
+| `anti-defensive-writing-en` | 英文版防御性写作克制（同上原则，英文） | Adkid-Zephyr |
 | `arxiv-paper-writer` | arXiv 论文写作与投稿流程 | appautomaton |
 
 ---

@@ -1,6 +1,6 @@
 # dsh-skills 技能索引
 
-本目录是**给 DeepSeek Harness 用的扁平技能层**。共 **257** 个技能。
+本目录是**给 DeepSeek Harness 用的扁平技能层**。共 **259** 个技能。
 
 ## 用法
 
@@ -27,6 +27,8 @@ New-Item -ItemType Junction -Path "$env:DSH_HOME\skills\ai-skills" -Target "<本
 | `aeon` | This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search. Use when working... | 1 |
 | `algorithmic-art` | Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or... | 4 |
 | `analytical-method-validation` | Plans, executes, and documents validation, verification, and transfer of analytical procedures under the governing framework - ICH Q2(R2) and Q14, USP <1220>/<1225>/<1226>, ICH M10 bioanalytical, CLSI... | 1 |
+| `anti-defensive-writing` | 论文写作、修改、压缩和实验组织全流程中阻止【防御性写作】。把论文视为一场学术发布会， 而不是项目总结、实验日志或自我审查报告：识别这项工作最值得发表的价值，围绕它建立 最有利、最完整、最有说服力的叙事。不平均展示、不主动示弱、不写实验流水账、不替审稿人 攻击自己。 触发词：论文润色、论文修改、写摘要、写引言、写结论、压缩论文、rebuttal、回复审稿意见、 组织实验、论文AI味、防御性写作、心虚... | 1 |
+| `anti-defensive-writing-en` | Stops defensive writing in papers. Treats a paper as a press conference, not a project summary or lab log: find the most publishable strength and build the strongest narrative around it. No volunteeri... | 1 |
 | `arbor` | Applies Arbor Hypothesis Tree Refinement to research artifacts with repeatable evaluators, including model training, agent harnesses, data synthesis and benchmark optimization. Uses persistent hypothe... | 1 |
 | `arxiv-paper-writer` | Write LaTeX ML/AI review articles for arXiv using the IEEEtran template and verified BibTeX citations. Use when writing, planning, or continuing an arXiv review/survey paper, or when validating and re... | 20 |
 | `astropy` | Comprehensive Python library for astronomy and astrophysics. This skill should be used when working with astronomical data including celestial coordinates, physical units, FITS files, cosmological cal... | 8 |
