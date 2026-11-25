@@ -1,0 +1,9 @@
+{
+  "upstream": "https://github.com/Yuan1z0825/nature-skills",
+  "commit": "c300047218d1015f3edeeea33a72cd298a7e9de5",
+  "license": "Apache-2.0",
+  "fetched_at": "2026-11-26",
+  "files": 736,
+  "size_mb": 5.26,
+  "trimmed": "已剔除 nature-figure/assets/（34 MB 示例成图，SKILL.md 零引用）、docs/、tests/、RDA-results/。"
+}

@@ -1,0 +1,9 @@
+{
+  "upstream": "https://github.com/Imbad0202/academic-research-skills",
+  "commit": "3eb9f07b8d0a95937b1205caa79c1e1ac207fbbd",
+  "license": "见 LICENSE / NOTICE.md（上游标 NOASSERTION）",
+  "fetched_at": "2026-11-26",
+  "files": 791,
+  "size_mb": 11.2,
+  "trimmed": "已剔除 evals/（1146 文件 / 12.9 MB）、tests/、docs/、examples/、audits/、plugin-evals*/；scripts/ 内全部 test_*.py 未复制。"
+}

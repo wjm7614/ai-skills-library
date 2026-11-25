@@ -1,0 +1,9 @@
+{
+  "upstream": "https://github.com/matsuikentaro1/humanizer_academic",
+  "commit": "96ad01a5d0cd9ccb1332df63f0c8f3c01c8aeb18",
+  "license": "见 LICENSE（上游标 NOASSERTION）",
+  "fetched_at": "2026-11-26",
+  "files": 12,
+  "size_mb": 1.12,
+  "trimmed": "整包收录（11 文件 / 1.1 MB），仅剔除 .git。"
+}

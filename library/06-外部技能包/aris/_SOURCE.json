@@ -1,0 +1,9 @@
+{
+  "upstream": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+  "commit": "3fefd34146d3317e407aec65a5a29335de87b9ee",
+  "license": "MIT",
+  "fetched_at": "2026-11-26",
+  "files": 391,
+  "size_mb": 6.09,
+  "trimmed": "已剔除 docs/（14.9 MB）、tests/、assets/（5.8 MB）、mcp-servers/、aris-monitor/、tools/。"
+}

@@ -1,0 +1,444 @@
+#!/usr/bin/env python3
+"""
+humanizer_check.py - mechanical checks for the humanizer_academic skill.
+
+Counts what a language model counts badly: words per sentence, em dashes,
+curly quotes, repeated openers, ", and" chains (including predicates that
+resume after a citation block), repeated phrases across paragraphs, repeated
+reporting verbs, and numbers that appear in the revision but not in the
+original. Standard library only. Always exits 0.
+
+Usage:
+    python humanizer_check.py revised.txt
+    python humanizer_check.py revised.txt --original original.txt
+    python humanizer_check.py < revised.txt
+
+A single stream can carry both texts when it contains the two marker lines:
+    ===ORIGINAL===
+    (original text)
+    ===REVISED===
+    (revised text)
+
+The word list reports candidates to read in context. It does not report
+violations, and the script gives no score.
+"""
+
+import argparse
+from collections import Counter
+import io
+import re
+import sys
+
+ORIGINAL_MARK = "===ORIGINAL==="
+REVISED_MARK = "===REVISED==="
+
+# A period after these does not end a sentence.
+ABBREVIATIONS = {
+    "e.g", "i.e", "et al", "vs", "cf", "fig", "figs", "eq", "eqs", "ref", "refs",
+    "no", "nos", "dr", "prof", "mr", "mrs", "ms", "st", "approx", "ca", "resp",
+    "inc", "ltd", "co", "jr", "sr", "vol", "pp", "p", "al", "etc", "viz",
+}
+
+# Words and phrases that the skill's patterns name. Reported as candidates only.
+CANDIDATES = [
+    (r"\bdelv(?:e|es|ed|ing)\b", "Pattern 7"),
+    (r"\btapestry\b", "Pattern 7"),
+    (r"\btestament\b", "Pattern 1/7"),
+    (r"\bpivotal\b", "Pattern 1/7"),
+    (r"\bmultifaceted\b", "Pattern 7"),
+    (r"\bintrica(?:te|cies|cy)\b", "Pattern 7"),
+    (r"\binterplay\b", "Pattern 7"),
+    (r"\b(?:evolving )?landscape\b", "Pattern 1/7"),
+    (r"\bshowcas(?:e|es|ed|ing)\b", "Pattern 4/7"),
+    (r"\bunderscor(?:e|es|ed|ing)\b", "Pattern 1/3/7"),
+    (r"\bfoster(?:s|ed|ing)?\b", "Pattern 7"),
+    (r"\bgarner(?:s|ed|ing)?\b", "Pattern 7"),
+    (r"\bholistic\b", "Pattern 7"),
+    (r"\bvibrant\b", "Pattern 4/7"),
+    (r"\bgroundbreaking\b", "Pattern 4"),
+    (r"\b(?:serves?|served|serving|stands?|stood|standing) as\b", "Pattern 8"),
+    (r",\s+(?:highlighting|emphasizing|reflecting|symbolizing)\b", "Pattern 3"),
+    (r"\b(?:markedly|remarkably|strikingly|dramatically|profoundly)\b", "Pattern 29"),
+    (r"\blinked to\b", "Pattern 19"),
+    (r"(?:^|(?<=[.!?]\s))Beyond\b", "Pattern 20"),
+    (r"\bvia\b", "Pattern 21"),
+    (r"\byield(?:s|ed|ing)?\b", "Pattern 25"),
+    (r"\b(?:In other words|Put differently|To put it another way|Simply put)\b", "Pattern 32"),
+    (r"\bIn order to\b", "Pattern 16"),
+    (r"\bDue to the fact that\b", "Pattern 16"),
+    (r"\bIt is important to note that\b", "Pattern 16"),
+    (r",\s+and (?:this|it|these)\b", "Pattern 35"),
+]
+
+NUMBER = re.compile(r"(?<![A-Za-z])\d+(?:[.,]\d+)*")
+
+# Pattern 35: ", and greater in A than in B" (subject and verb dropped).
+GAPPED = re.compile(
+    r",\s+and (?:greater|lower|higher|later|earlier|longer|shorter|less|more|smaller|larger)\b[^.;]*?\bthan\b"
+)
+# Pattern 35: a second predicate that resumes after a citation or statistics block,
+# e.g. "... (Smith et al., 2020; Lee, 2021), and with lower income" or "... [3, 4], and to ...".
+SPLIT_BY_CITATION = re.compile(
+    r"(?:\([^()]*\d[^()]*\)|\[[^\[\]]*\d[^\[\]]*\])\s*,\s+and\s+"
+    r"(?:with|to|in|by|for|among|from|on|at|as|than|through|including|across|between)\b"
+)
+# Pattern 35: "between X and A and B".
+BETWEEN = re.compile(r"\bbetween\b(?:\s+(?!between\b)[^\s.;:]+){1,6}?\s+and\b(?:\s+[^\s.;:]+){1,3}?\s+and\b")
+# Pattern 35: ", and" that joins a clause or a predicate rather than closing a list:
+# a verb follows within a few words.
+VERB = r"(?:is|are|was|were|did|does|do|had|has|have|may|might|can|could|would|should|will|remained|became|showed|reported|reached)"
+CLAUSE_AND = re.compile(r",\s+and(?:\s+[^\s,.;:]+){0,4}?\s+" + VERB + r"\b")
+
+# Pattern 36: repeated non-term phrases across paragraphs.
+CITATION_OR_STAT = re.compile(r"\([^()]*\d[^()]*\)|\[[^\[\]]*\d[^\[\]]*\]")
+PHRASE_STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "nor", "if", "of", "in", "on", "at",
+    "to", "for", "with", "by", "from", "as", "into", "about", "than", "that",
+    "this", "these", "those", "it", "its", "they", "their", "them", "we", "our",
+    "us", "he", "she", "his", "her", "who", "which", "where", "when", "while",
+    "is", "are", "was", "were", "be", "been", "being", "has", "have", "had",
+    "do", "does", "did", "not", "no", "also", "more", "most", "such", "both",
+    "each", "other", "all", "any", "some", "may", "might", "can", "could",
+    "would", "should", "will", "et", "al",
+}
+DANGLING_EDGES = {
+    "a", "an", "the", "and", "or", "but", "of", "in", "on", "at", "to", "for",
+    "with", "by", "from", "as", "into", "through", "between", "among", "after",
+    "before", "during", "without", "under", "over", "about", "than", "that",
+    "this", "these", "those", "is", "are", "was", "were", "be", "been", "has",
+    "have", "had", "not", "et", "al",
+}
+
+# Pattern 36 (local form): one reporting verb repeated in a sentence or in
+# three consecutive sentences. "self-reported" and similar compounds are skipped.
+REPORTING_VERBS = {
+    "report": r"reports?|reported",
+    "show": r"shows?|showed|shown",
+    "demonstrate": r"demonstrates?|demonstrated",
+    "find": r"finds?|found",
+    "observe": r"observes?|observed",
+    "indicate": r"indicates?|indicated",
+    "reveal": r"reveals?|revealed",
+    "suggest": r"suggests?|suggested",
+    "exhibit": r"exhibits?|exhibited",
+    "display": r"displays?|displayed",
+    "identify": r"identif(?:y|ies|ied)",
+    "document": r"documents?|documented",
+    "describe": r"describes?|described",
+}
+REPORTING_RE = {
+    lemma: re.compile(r"(?<![\w-])(?:" + forms + r")(?![\w-])", re.IGNORECASE)
+    for lemma, forms in REPORTING_VERBS.items()
+}
+
+
+def read_text(path):
+    with open(path, "r", encoding="utf-8-sig") as handle:
+        return handle.read()
+
+
+def split_stream(text):
+    """Return (original, revised) from a stream that may carry both."""
+    if REVISED_MARK not in text:
+        return None, text
+    before, revised = text.split(REVISED_MARK, 1)
+    original = before.split(ORIGINAL_MARK, 1)[1] if ORIGINAL_MARK in before else before
+    return original, revised
+
+
+def paragraphs(text):
+    """Yield prose paragraphs, skipping headings, tables, and code blocks."""
+    block, fenced = [], False
+    for raw in text.replace("\r\n", "\n").split("\n") + [""]:
+        line = raw.strip()
+        if line.startswith("```"):
+            fenced = not fenced
+            line = ""
+        if fenced:
+            continue
+        line = re.sub(r"^>\s?", "", line)
+        if not line or line.startswith("#") or line.startswith("|"):
+            if block:
+                yield " ".join(block)
+                block = []
+            continue
+        line = re.sub(r"^(?:[-*+]|\d+[.)])\s+", "", line)
+        block.append(line)
+
+
+def sentences(paragraph):
+    """Split a paragraph into sentences, tolerating common abbreviations."""
+    result, start = [], 0
+    for match in re.finditer(r"[.!?][\"')\]]*\s+(?=[\"'(\[]?[A-Z0-9])", paragraph):
+        head = paragraph[start:match.start()]
+        last = re.split(r"[\s(]", head)[-1].lower().rstrip(".")
+        two = " ".join(re.split(r"\s", head)[-2:]).lower().rstrip(".")
+        if paragraph[match.start()] == "." and (
+            last in ABBREVIATIONS or two in ABBREVIATIONS or re.fullmatch(r"[a-z]", last)
+        ):
+            continue
+        result.append(paragraph[start:match.end()].strip())
+        start = match.end()
+    tail = paragraph[start:].strip()
+    if tail:
+        result.append(tail)
+    return result
+
+
+def word_count(sentence):
+    return len(sentence.split())
+
+
+def first_word(sentence):
+    match = re.match(r"[\"'(\[]*([A-Za-z][A-Za-z'-]*)", sentence)
+    return match.group(1).lower() if match else ""
+
+
+def snippet(text, width=70):
+    text = " ".join(text.split())
+    return text if len(text) <= width else text[: width - 3] + "..."
+
+
+def normalize_number(token):
+    token = token.rstrip(".,")
+    if re.fullmatch(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?", token):
+        token = token.replace(",", "")
+    return token
+
+
+def numbers(text):
+    return {normalize_number(m.group(0)) for m in NUMBER.finditer(text)}
+
+
+def is_subtuple(short, long):
+    n = len(short)
+    return any(long[i : i + n] == short for i in range(len(long) - n + 1))
+
+
+def repeated_phrases(paras, min_count=4, min_paras=2, limit=15):
+    """Return recurring 3-4 word phrases across paragraphs as candidates."""
+    total_counts = Counter()
+    para_sets = {}
+    for p_idx, p in enumerate(paras):
+        cleaned = CITATION_OR_STAT.sub(" ", p)
+        for chunk in re.split(r"[.,;:?!()\[\]\"]+", cleaned):
+            words = re.findall(r"[a-z0-9][a-z0-9'-]*", chunk.lower())
+            for n in (3, 4):
+                for i in range(len(words) - n + 1):
+                    ng = tuple(words[i : i + n])
+                    if any(any(ch.isdigit() for ch in w) for w in ng):
+                        continue
+                    if sum(1 for w in ng if w not in PHRASE_STOPWORDS) < 2:
+                        continue
+                    if "et" in ng and "al" in ng:
+                        continue
+                    if ng[0] in DANGLING_EDGES or ng[-1] in DANGLING_EDGES:
+                        continue
+                    total_counts[ng] += 1
+                    para_sets.setdefault(ng, set()).add(p_idx)
+
+    candidates = [
+        ng
+        for ng, cnt in total_counts.items()
+        if cnt >= min_count and len(para_sets[ng]) >= min_paras
+    ]
+    cand_set = set(candidates)
+
+    kept = []
+    for ng in candidates:
+        cnt = total_counts[ng]
+        # Drop 3-gram subsumed by a 4-gram with similar count.
+        if len(ng) == 3 and any(
+            len(other) == 4
+            and total_counts[other] >= cnt * 0.8
+            and is_subtuple(ng, other)
+            for other in candidates
+        ):
+            continue
+        # Drop 4-gram whose leading/trailing function word adds no frequency distinction.
+        if len(ng) == 4:
+            if ng[0] in DANGLING_EDGES and ng[1:] in cand_set and total_counts[ng[1:]] >= cnt:
+                continue
+            if ng[-1] in DANGLING_EDGES and ng[:-1] in cand_set and total_counts[ng[:-1]] >= cnt:
+                continue
+        kept.append(ng)
+
+    kept.sort(key=lambda ng: (-total_counts[ng], -len(para_sets[ng]), -len(ng), ng))
+    return [(" ".join(ng), total_counts[ng], len(para_sets[ng])) for ng in kept[:limit]]
+
+
+def repeated_reporting_verbs(para_sentences):
+    """Return lines for one reporting verb repeated in a sentence or in 3 consecutive sentences."""
+    lines = []
+    for index, sents in enumerate(para_sentences, 1):
+        counts = [
+            {
+                lemma: len(pattern.findall(CITATION_OR_STAT.sub(" ", s)))
+                for lemma, pattern in REPORTING_RE.items()
+            }
+            for s in sents
+        ]
+        for lemma in REPORTING_VERBS:
+            within = [i for i, c in enumerate(counts) if c[lemma] >= 2]
+            for i in within:
+                lines.append(
+                    f"  - P{index}, sentence {i + 1}: \"{lemma}\" x {counts[i][lemma]}: {snippet(sents[i], 60)}"
+                )
+            if within:
+                continue
+            for i in range(len(counts) - 2):
+                if all(counts[j][lemma] for j in (i, i + 1, i + 2)):
+                    lines.append(
+                        f"  - P{index}: sentences {i + 1}-{i + 3} all use \"{lemma}\""
+                    )
+                    break
+    return lines
+
+
+def check(revised, original=None):
+    out = []
+    paras = list(paragraphs(revised))
+    prose = "\n".join(paras)
+
+    # 1. Em dashes and curly quotes: the rules allow none.
+    dash_hits = [p for p in paras if "—" in p]
+    out.append(f"Em dashes: {prose.count(chr(0x2014))}")
+    for p in dash_hits:
+        for m in re.finditer("—", p):
+            out.append(f"  - {snippet(p[max(0, m.start() - 35): m.end() + 35])}")
+    curly = len(re.findall("[“”‘’]", prose))
+    out.append(f"Curly quotes: {curly}")
+
+    # 2. Sentence rhythm (Pattern 34): all sentences within a 5-word range.
+    out.append("")
+    out.append("Sentence lengths by paragraph (words):")
+    uniform = 0
+    para_sentences = []
+    for index, p in enumerate(paras, 1):
+        sents = sentences(p)
+        para_sentences.append(sents)
+        counts = [word_count(s) for s in sents]
+        flag = ""
+        if len(counts) >= 3 and max(counts) - min(counts) <= 5:
+            flag = "  <- too uniform (all within a 5-word range)"
+            uniform += 1
+        listing = ", ".join(str(c) for c in counts)
+        out.append(f"  P{index} [{listing}]{flag}  {snippet(p, 45)}")
+    out.append(f"Paragraphs that fail the rhythm criterion: {uniform}")
+
+    # 3. Repeated openers.
+    out.append("")
+    opener_lines = []
+    for index, sents in enumerate(para_sentences, 1):
+        firsts = [first_word(s) for s in sents]
+        for i in range(len(firsts) - 2):
+            if firsts[i] and firsts[i] == firsts[i + 1] == firsts[i + 2]:
+                opener_lines.append(
+                    f"  - P{index}: sentences {i + 1}-{i + 3} all open with \"{firsts[i].capitalize()}\""
+                )
+                break
+        extra = len(re.findall(r"\bAdditionally\b", " ".join(sents)))
+        if extra > 1:
+            opener_lines.append(f"  - P{index}: \"Additionally\" appears {extra} times (allowed once)")
+    out.append(f"Repeated openers: {len(opener_lines)}")
+    out.extend(opener_lines)
+
+    # 4. Numbers (fidelity check).
+    if original is not None:
+        out.append("")
+        before, after = numbers(original), numbers(revised)
+        added = sorted(after - before)
+        dropped = sorted(before - after)
+        out.append(f"Numbers in the revision that are not in the original: {len(added)}")
+        if added:
+            out.append("  " + ", ".join(added))
+        out.append(f"Numbers in the original that are missing from the revision: {len(dropped)}")
+        if dropped:
+            out.append("  " + ", ".join(dropped))
+
+    # 5. Clauses chained with ", and" (Pattern 35): sentences to read, not violations.
+    out.append("")
+    and_lines = []
+    for index, sents in enumerate(para_sentences, 1):
+        joins = sum(len(CLAUSE_AND.findall(s)) for s in sents)
+        flagged = []
+        for s in sents:
+            reasons = []
+            n_join = len(CLAUSE_AND.findall(s))
+            if n_join:
+                reasons.append(f"\", and\" + verb x {n_join}")
+            n_and = len(re.findall(r"\band\b", s))
+            if word_count(s) > 40 and n_and >= 3:
+                reasons.append(f"{word_count(s)} words, {n_and} x \"and\"")
+            if GAPPED.search(s):
+                reasons.append("gapped clause")
+            if BETWEEN.search(s):
+                reasons.append("\"between X and A and B\"")
+            split = SPLIT_BY_CITATION.search(s)
+            if split:
+                reasons.append("predicate resumes after citations or statistics")
+            if n_join or (reasons and len(reasons) > 1) or GAPPED.search(s) or BETWEEN.search(s) or split:
+                flagged.append(f"      {'; '.join(reasons)}: {snippet(s, 60)}")
+        if joins >= 2 or flagged:
+            and_lines.append(f"  - P{index}: \", and\" joining a clause or predicate: {joins}")
+            and_lines.extend(flagged)
+    out.append(f"Paragraphs with \", and\" chains to read (not violations): {sum(1 for l in and_lines if l.startswith('  - '))}")
+    out.extend(and_lines)
+
+    # 6. Candidate words.
+    out.append("")
+    found = []
+    for pattern, label in CANDIDATES:
+        for m in re.finditer(pattern, prose):
+            found.append(f"  - \"{m.group(0).strip(', ')}\" ({label})")
+    out.append(f"Candidate words to read in context (not violations): {len(found)}")
+    out.extend(found)
+
+    # 7. Repeated phrases across paragraphs (Pattern 36): candidates to read in context.
+    out.append("")
+    phrases = repeated_phrases(paras)
+    out.append(
+        f"Repeated phrases to read in context (ignore study terms and statistical notation): {len(phrases)}"
+    )
+    for phrase, cnt, n_paras in phrases:
+        out.append(f"  - \"{phrase}\" ({cnt} times across {n_paras} paragraphs)")
+
+    # 8. Repeated reporting verbs (Pattern 36, local form): candidates to read in context.
+    out.append("")
+    verb_lines = repeated_reporting_verbs(para_sentences)
+    out.append(
+        f"Repeated reporting verbs to read in context (fine when the evidence is the same kind): {len(verb_lines)}"
+    )
+    out.extend(verb_lines)
+
+    out.append("")
+    out.append("Fix em dashes, curly quotes, and uniform paragraphs.")
+    out.append("Check each added number against the original; a number that the original spelled out is fine.")
+    out.append("Judge the candidates, the \", and\" sentences, repeated phrases, and repeated reporting verbs in context. One revision round is enough.")
+    return "\n".join(out)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Mechanical checks for humanizer_academic.")
+    parser.add_argument("file", nargs="?", help="revised text (default: standard input)")
+    parser.add_argument("--original", help="original text, for the number comparison")
+    args = parser.parse_args()
+
+    try:
+        if args.file:
+            original, revised = split_stream(read_text(args.file))
+        else:
+            data = io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8-sig").read()
+            original, revised = split_stream(data)
+        if args.original:
+            original = read_text(args.original)
+        report = check(revised, original)
+    except Exception as error:  # never block the edit on a checker problem
+        report = f"humanizer_check could not run ({error}). Do the checks by hand."
+
+    sys.stdout.buffer.write((report + "\n").encode("utf-8"))
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

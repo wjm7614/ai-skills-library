@@ -1,7 +1,8 @@
 # AI Skills Library · 个人技能库
 
 > 面向 **大二 · 人工智能专业** 在校生的可执行技能集合。
-> 五条主线：**做科研 / 写论文** + **大学生申报材料** + **VibeCoding 实战与安全自检** + **文献综述工作流** + **学术绘图**。
+> 五条原创主线：**做科研 / 写论文** + **大学生申报材料** + **VibeCoding 实战与安全自检** + **文献综述工作流** + **学术绘图**。
+> 外加一层 **外部技能包**（`06-外部技能包/`）：从 5 个开源仓库引入的 **404 个技能**，按来源完整收录、不做改写。
 > 每个技能都是可被 AI Agent 直接加载的独立单元（Agent Skills 标准）。
 
 ---
@@ -76,6 +77,15 @@ ai-skills-library/
 ├── 05-学术绘图/             # 用 R 出科研/生信图（1 个技能）
 │   ├── plotthis-r-plotting/       # SKILL.md + 40+ 函数 API 快照 + 3 个 R 脚本
 │   └── _上游文档-AGENTS.md / -LICENSE.md
+│
+├── 06-外部技能包/           # 第三方完整技能集（404 个技能，按来源收录）
+│   ├── README.md                  # 总览：五包对比、用法、许可、精简说明
+│   ├── scientific-agent-skills/   # K-Dense 科学技能 · 177 技能 · MIT
+│   ├── nature-skills/             # Nature 写作与配图 · 24 技能 · Apache-2.0
+│   ├── aris/                      # 自主科研循环 ARIS · 197 技能 · MIT
+│   ├── academic-research-skills/  # 研究→写作→评审流水线 · 5 技能
+│   └── humanizer-academic/        # 学术文本去 AI 味 · 1 技能
+│       # 每个包内含 _INVENTORY.md（全量清单）、_SOURCE.json（来源与提交）、LICENSE
 │
 └── _meta/
     ├── SOURCES.md         # 来源、许可证、抓取时间
@@ -161,11 +171,13 @@ python 02-申报材料/奖学金/national-scholarship/build.py \
 
 ---
 
-## 两条线的使用边界
+## 三条线的使用边界
 
 **科研线**：方法论，通用，偏向 AI / 计算机方向。核心作者是南京大学 LAMDA 实验室郭兰哲老师课题组。
 
 **申报材料线**：文书生成，带格式排版。**有诚实底线** —— 技能内置约束：只写你能提供证据的事实，缺失必须追问，不许编造奖项和经历。申报材料造假会进档案，这是红线。
+
+**外部技能包线（06）**：**不是原创，是原样收录**。404 个技能按上游结构完整保留，只剔除站点资源、测试集和示例成图。价值和风险都在"原样"上：覆盖面广（科研从选题到投稿、从统计到绘图全覆盖），但未经本库改写，质量参差、部分技能依赖特定工具链或付费 API，用之前先读该技能的 `SKILL.md` 和 `license` 字段。
 
 ---
 
@@ -178,5 +190,13 @@ python 02-申报材料/奖学金/national-scholarship/build.py \
 
 - [LAMDA-NeSy/Research-Starter-Kit](https://github.com/LAMDA-NeSy/Research-Starter-Kit) —— 科研入门指南
 - [cuic19053-hue/awesome-student-ai-skills](https://github.com/cuic19053-hue/awesome-student-ai-skills) —— 大学生申报材料（MIT）
+
+`06-外部技能包/` 的五个上游：
+
+- [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) —— 科学技能库（MIT）
+- [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) —— Nature 风格写作与配图（Apache-2.0）
+- [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) —— ARIS 自主科研循环（MIT）
+- [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills) —— 学术流水线
+- [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) —— 学术文本去 AI 味
 
 本库为个人整理版，保留原作者署名与免责声明。

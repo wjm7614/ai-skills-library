@@ -4,13 +4,17 @@
 
 ```
 ai-skills-library/
-├── library/          ← 给人看的中文分类库（199 文件，含 CATALOG.md）
+├── library/          ← 给人看的中文分类库（4168 文件，含 CATALOG.md 与 06-外部技能包）
 ├── dsh-skills/       ← 给 DSH 吃的扁平技能层（337 技能 / 4975 文件）
 │   ├── INDEX.md      ← 全部技能一览表
 │   └── <kebab-name>/SKILL.md
 ├── DSH-USAGE.md      ← 扫描规则 / frontmatter 规范 / 常见坑
 └── (根目录 01-科研入门 … 05-学术绘图 为上一轮遗留，与 library/ 内完全重复)
 ```
+
+> **关于 `library/06-外部技能包/`**：这一层的 404 个第三方技能**刻意没有摊平进 `dsh-skills/`**。
+> `dsh-skills` 是精选层，把 404 个原样技能塞进去会让本地扫描出的技能列表翻近三倍，并和现有 259 个目录产生大量重名冲突。
+> 要用外部包里的技能，直接从 `library/06-外部技能包/<包名>/skills/<技能名>/SKILL.md` 取；确实常用的，再单独拷一份进 `dsh-skills/`。
 
 ---
 

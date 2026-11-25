@@ -1,0 +1,9 @@
+{
+  "upstream": "https://github.com/K-Dense-AI/scientific-agent-skills",
+  "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+  "license": "MIT",
+  "fetched_at": "2026-11-26",
+  "files": 2027,
+  "size_mb": 20.94,
+  "trimmed": "已剔除 docs/（253 MB 截图与站点资源）、tests/、.github/；仅保留 skills/ 技能本体。"
+}

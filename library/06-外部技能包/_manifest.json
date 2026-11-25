@@ -1,0 +1,62 @@
+[
+  {
+    "upstream": "https://github.com/K-Dense-AI/scientific-agent-skills",
+    "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+    "license": "MIT",
+    "fetched_at": "2026-11-26",
+    "files": 2027,
+    "size_mb": 20.94,
+    "trimmed": "已剔除 docs/（253 MB 截图与站点资源）、tests/、.github/；仅保留 skills/ 技能本体。",
+    "key": "scientific-agent-skills",
+    "title": "K-Dense 科学技能库",
+    "desc": "面向科研全流程的 177 个即用型 Agent Skills：文献检索、数据分析、统计建模、科学可视化、临床报告、实验方案、基金申请等。"
+  },
+  {
+    "upstream": "https://github.com/Yuan1z0825/nature-skills",
+    "commit": "c300047218d1015f3edeeea33a72cd298a7e9de5",
+    "license": "Apache-2.0",
+    "fetched_at": "2026-11-26",
+    "files": 736,
+    "size_mb": 5.26,
+    "trimmed": "已剔除 nature-figure/assets/（34 MB 示例成图，SKILL.md 零引用）、docs/、tests/、RDA-results/。",
+    "key": "nature-skills",
+    "title": "Nature 风格学术技能",
+    "desc": "对齐 Nature 论文表达与科研绘图规范的 24 个中文技能：写图、润色、审稿回复、图片转 PPT、文献检索、数据统计、投稿提案等。"
+  },
+  {
+    "upstream": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+    "commit": "3fefd34146d3317e407aec65a5a29335de87b9ee",
+    "license": "MIT",
+    "fetched_at": "2026-11-26",
+    "files": 391,
+    "size_mb": 6.09,
+    "trimmed": "已剔除 docs/（14.9 MB）、tests/、assets/（5.8 MB）、mcp-servers/、aris-monitor/、tools/。",
+    "key": "aris",
+    "title": "ARIS 自主科研循环",
+    "desc": "纯 Markdown 的自主 ML 科研技能集（197 个 SKILL.md）：跨模型评审循环、Idea 发现、实验编排、论文自动改进、引用交叉核验。"
+  },
+  {
+    "upstream": "https://github.com/Imbad0202/academic-research-skills",
+    "commit": "3eb9f07b8d0a95937b1205caa79c1e1ac207fbbd",
+    "license": "见 LICENSE / NOTICE.md（上游标 NOASSERTION）",
+    "fetched_at": "2026-11-26",
+    "files": 791,
+    "size_mb": 11.2,
+    "trimmed": "已剔除 evals/（1146 文件 / 12.9 MB）、tests/、docs/、examples/、audits/、plugin-evals*/；scripts/ 内全部 test_*.py 未复制。",
+    "key": "academic-research-skills",
+    "title": "学术研究全流程技能",
+    "desc": "Claude Code 插件形态的学术流水线（5 个技能）：deep-research 深度检索、academic-paper 论文写作、academic-paper-reviewer 同行评审、academic-pipeline 全流程编排、sr-screener 系统综述筛选。"
+  },
+  {
+    "upstream": "https://github.com/matsuikentaro1/humanizer_academic",
+    "commit": "96ad01a5d0cd9ccb1332df63f0c8f3c01c8aeb18",
+    "license": "见 LICENSE（上游标 NOASSERTION）",
+    "fetched_at": "2026-11-26",
+    "files": 12,
+    "size_mb": 1.12,
+    "trimmed": "整包收录（11 文件 / 1.1 MB），仅剔除 .git。",
+    "key": "humanizer-academic",
+    "title": "学术文本去 AI 味",
+    "desc": "单一技能：消除学术医学论文中的 AI 生成痕迹，让文字读起来更自然、更像专业作者手写。含改写规则、禁用词表与示例对照。"
+  }
+]

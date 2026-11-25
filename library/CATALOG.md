@@ -143,6 +143,30 @@ curl -L -o SKILL.md \
 
 ---
 
+## 六、外部技能包（404 个，按来源原样收录）
+
+位置：`06-外部技能包/`
+
+这一节与 01-05 **性质不同**：01-05 是逐个挑选、改写过的中文原创技能；06 是**第三方完整技能集，原样收录**，只剔除站点资源、测试集与示例成图，不改写、不重排。
+
+| # | 来源包 | 上游 | 技能 | 体积 | 许可 | 明细 |
+|---|---|---|---|---|---|---|
+| 1 | `scientific-agent-skills/` | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | 177 | 20.9 MB | MIT | [`_INVENTORY.md`](06-外部技能包/scientific-agent-skills/_INVENTORY.md) |
+| 2 | `nature-skills/` | [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) | 24 | 5.3 MB | Apache-2.0 | [`_INVENTORY.md`](06-外部技能包/nature-skills/_INVENTORY.md) |
+| 3 | `aris/` | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) | 197 | 6.1 MB | MIT | [`_INVENTORY.md`](06-外部技能包/aris/_INVENTORY.md) |
+| 4 | `academic-research-skills/` | [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills) | 5 | 11.2 MB | 见 LICENSE / NOTICE.md | [`_INVENTORY.md`](06-外部技能包/academic-research-skills/_INVENTORY.md) |
+| 5 | `humanizer-academic/` | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 1 | 1.1 MB | 见 LICENSE | [`_INVENTORY.md`](06-外部技能包/humanizer-academic/_INVENTORY.md) |
+
+**覆盖方向**：文献检索与筛选、统计建模、科学可视化与配图、论文写作与润色、审稿与回复、系统综述、基金/提案、实验编排、自主研究循环、文本去 AI 味。
+
+**注意**：
+- 部分技能自带独立许可（如 `scientific-agent-skills/skills/deepspot-m` 是 PolyForm-Noncommercial-1.0.0），**以单个 `SKILL.md` 的 `license` 字段为准**，不看包级 LICENSE。
+- `aris` 大量依赖 `mcp__codex__*` 等外部工具，缺工具时跑不动。
+
+> 总览、用法、许可与精简说明：[`06-外部技能包/README.md`](06-外部技能包/README.md)
+
+---
+
 ## 汇总
 
 | 主线 | 收录 | 总计 |
@@ -152,7 +176,8 @@ curl -L -o SKILL.md \
 | 03 VibeCoding 实战 | 5 | 5（全覆盖） |
 | 04 文献综述工作流 | 6 | 6（全覆盖） |
 | 05 学术绘图 | 1 | 1（全覆盖） |
-| **合计可用技能** | **48** | — |
+| 06 外部技能包 | 404 | 404（全覆盖，原样收录） |
+| **合计可用技能** | **452** | — |
 
 附件归档：21 张原始卡片图（`03-VibeCoding实战/assets/`）。
 
@@ -165,3 +190,4 @@ curl -L -o SKILL.md \
 | 03 VibeCoding 实战 | 用户提供 | — |
 | 04 文献综述工作流 | **上游未声明** | 不建议商业分发 |
 | 05 学术绘图 | **GPL-3.0-or-later** | 传染性许可；上游根目录原创文件未授权 |
+| 06 外部技能包 | 混合：MIT ×2、Apache-2.0 ×1、NOASSERTION ×2 | 逐包保留 LICENSE；单技能另看 `SKILL.md` 的 `license` 字段 |
